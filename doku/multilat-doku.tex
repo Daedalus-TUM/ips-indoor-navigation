@@ -1,0 +1,111 @@
+\documentclass[ngerman,paper=a4,11pt]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{lmodern}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[automark]{scrpage2}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc} %% verhindert Gleitobjekte unterhalb von Fußnoten
+
+
+%\usepackage[unicode=true, 
+% bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+% breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=true]{hyperref}
+%\hypersetup{pdftitle={Latex-Test},
+% pdfauthor={Markus Hefele},
+% pdfkeywords={multilat doku},
+% linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue, 
+% pdfpagelabels,pdftex}
+
+\pagestyle{scrheadings}
+
+%\ohead[]{}			%oben links
+%\chead[]{}			%oben mitte
+%\ihead[]{}			%oben rechts
+%\ofoot[]{}	%unten links
+%\cfoot[]{}			%unten mitte
+%\ifoot[]{}	%unten rechts
+
+
+\begin{document}
+
+
+
+\author{\textsc{Markus Hefele}}
+\date{}
+\title{Multilat}
+\maketitle
+
+
+
+%\tableofcontents
+
+\section{Einführung}
+Multilat dient der näherungsweisen Berechnung einer Position aus Abständen zu bekannten Referenzpunkten, 
+auch wenn diese fehlerbehaftet sind. Eine Anwendung ist die Positionsberechnung des Indoor Positioning Systems, das mithilfe von Laufzeitmessung von Ultraschallpulsen die Entfernungen eines Senders zu mehreren
+Basisstationen ermittelt.
+
+
+\section{Die Mathematik dahinter}
+
+\subsection{Vorüberlegungen}
+Den Abstand zweier Punkte im $\mathbb{R}^ 3 $ zu beschreibt folgende Formel:
+
+\begin{equation}
+r_i = \sqrt{(x-x_i)^2 + (y - y_i)^2 + (z - z_i)^2}
+\end{equation}
+
+Dabei ist $(x,y,z)^ T = \vec{p}$ die gesuchte Position, $(x_i,y_i,z_i)^ T = \vec{p}_i$ die Position der i-ten Basisstation und $r_i$ der Abstand zu dieser. Diese Formel kann nun quadriert und umgestellt werden:
+
+\begin{equation}
+0 = (x-x_i)^2 + (y - y_i)^2 + (z - z_i)^2 -r_i^2
+\end{equation}
+
+Sollte das Ergebnis von 0 abweichen, entspricht die Position nicht dem exakten Wert.
+Auf diese Weise kann ein Fehler ermittelt werden, wie gut der Positionsvektor zu der Vorgabe aus Boden"-stations"-position und Abstand passt. Um ein Maß für die Güte der Position für alle $n$ Bodenstationen
+zu erhalten, werden alle Fehlerquadrate summiert:
+
+\begin{equation}
+R(\vec{p}) = \sum\limits_{i=1}^n \left((x-x_i)^2 + (y - y_i)^2 + (z - z_i)^2 -r_i^2\right)^ 2
+\label{residuum}
+\end{equation}
+
+Nun kann mit einem numerischen Verfahren dieses Residuum minimiert werden.
+
+\subsection{Optimierung}
+
+Zur Minimierung wird das Gradienten"-ab"-stiegs"-ver"-fahren mit Armijo-Schritt"-wei"-ten"-steuerung eingesetzt.
+
+
+Die Iteration besteht aus drei Schritten:
+
+Zuerst wird der Gradient von (\ref{residuum}) berechnet.
+\begin{equation}
+\nabla R(\vec{p}) =4 \sum\limits_{i=1}^n \left(\lVert \vec{p}-\vec{p}_i \rVert ^2 - r_i^ 2 \right) (\vec{p}-\vec{p}_i)
+\end{equation}
+
+Dazu wird eine Schrittweite $h_{(k)}$ nach Armijo bestimmt.
+
+Sei $\gamma \in (0,1)$, dann bestimme das größte $h \in \left\lbrace1,\frac{1}{2},\frac{1}{4},\frac{1}{8},... \right\rbrace$ 
+mit:
+\begin{equation}
+R\left(\vec{p}_{(k)} - h_{(k)} \nabla R\left(\vec{p}_{(k)}\right)\right) \leq R\left(\vec{p}_{(k)}\right) - h_{(k)} \gamma \nabla R\left(\vec{p}_{(k)}\right)^ T \nabla R\left(\vec{p}_{(k)}\right)
+\end{equation}
+
+
+Dann kann ausgehend von einer Startposition $(x_{(0)},y_{(0)}, z_{(0)})^ T$ eine neue 
+Position berechnet werden.
+\begin{equation}
+\vec{p}_{(k+1)} = \vec{p}_{(k)} - h_{(k)} \nabla R(\vec{p}_{(k)})
+\end{equation}
+
+Der Schleifen"-abbruch erfolgt, wenn der Positionsvektor $\vec{p}$ im Rahmen der Genauigkeit stationär ist:
+
+\begin{equation}
+\lVert\vec{p}_{(k+1)} - \vec{p}_{(k)}\rVert < TOL
+\end{equation}
+
+
+\end{document}
