@@ -1,7 +1,0 @@
-Hardware:
-IR delay messen
-mehr bodenstationen (neues Layout)
-
-
-Software:
-genauerer timer (nicht relevant)
