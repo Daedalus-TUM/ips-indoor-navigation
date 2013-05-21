@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
-# 17.05.2013
+# 21.05.2013
 
-VERSION = (0,7,0,2)
+VERSION = (0,7,0,3)
 
+# Änderungen bitte im CHANGELOG unten vermerken und Versionsnummer anpassen
+#
 # Zu den Kommentaren:
 #   * "TODO" meist steht dabei, was zu tun ist, kein Anspruch auf Vollständigkeit
 #   * "???" bedeutet: Besprecht das mit den anderen Teams und mir (Schnittstelle definieren) oder macht einen Vorschlag 
@@ -26,6 +28,11 @@ VERSION = (0,7,0,2)
 #   * GUI erweitern:
 #       - Menü: Speichern, Laden ...
 #       - Wegpunktliste in externem Dialog bearbeiten
+#       - Init-Fenster: und los soll das Fenster schließen, aktuell besser das init-Fenster schließen statt den Button zu drücken
+#   * Globale Variablen durch was sinnvolleres erstzen
+#
+# Abhängigkeiten:
+#   python3-gi python3-gi-cairo python3-all python3-regex python3-serial python3-gobject
 #
 # Bei Fragen erreicht Ihr mich unter daedalus[at]abak19.de
 
@@ -142,10 +149,11 @@ class Arduino(threading.Thread):
   global stations
   #initialisierung, wird genau einmal ausgeführt
   def __init__(self,main):
+    print ("Arduino init")
     threading.Thread.__init__(self) 
     self.ttylock = threading.Lock()
     self.main = main
-    self.s = serial.Serial(self.main.ttyport, 115200, 8, 'N', 1, 0.05)
+    self.s = serial.Serial(self.main.ttyport, 115200, 8, 'N', 1, 0.005)
     self.s.flush()
     #self.pattern = re.compile(b"deltat from (\d+) - (\d+) - (\d+\.\d+)") seit Version 0.7 veraltet
     # RegEx für Laufzeitmessungsdaten TODO: allgemeiner formulieren und speziellere Auswertung in recv_packet
@@ -153,7 +161,9 @@ class Arduino(threading.Thread):
     self.run_ = True
   #Dauerschleife, Beendet falls self.run_ == False; siehe threading-doku
   def run(self):
+    #print ("Arduino start running")
     while(self.run_):
+      #print (self.s.inWaiting())
       if (self.s.inWaiting() > 0):
         self.recv_packet()
       time.sleep(0.0005) # je nach dem wie viele Pakete verschickt werden
@@ -172,10 +182,10 @@ class Arduino(threading.Thread):
     self.ttylock.release()
   #empfängt und verarbeitet Daten vom Arduino, löst eventhandler.onNewPos aus
   def recv_packet(self):
-    self.ttylock.acquire()
-    if (self.s.inWaiting() > 0):
+    self.ttylock.acquire() #vor jedem Zugriff aus die serialle Verbindung lock setzen
+    while (self.s.inWaiting() > 0):
       res = self.s.readline()
-      print (res)
+      #print (res)
       #TODO: andere Pattern, falls noch andere Daten vom Arduino (nrf24) kommen
       tmp = self.pattern.search(res)
       if tmp is not None:
@@ -189,8 +199,9 @@ class Arduino(threading.Thread):
             clib_multilat()
             self.main.eventhandler.onNewPos()
       else:
-        print (res)
-    self.ttylock.release()
+        #print (res)
+        pass
+    self.ttylock.release() # lock lösen
   #den Arduino neustarten
   def reset(self):
     self.s.setDTR(False)
@@ -348,6 +359,7 @@ class GraphicalUserInterface(threading.Thread):
         #self.drawingarea.queue_draw()
         GObject.timeout_add(99, self.onRedraw)
         window.show_all()
+        self.roti = 1 #debug
         pass
     def run(self):
         #Gdk.threads_enter()
@@ -355,41 +367,94 @@ class GraphicalUserInterface(threading.Thread):
         #Gdk.threads_leave()
         pass
     def draw(self, widget, cr):
+        #Zeichnet die Karte
         #global posx, posy, posz
+        rect = self.drawingarea.get_allocation()
+        self.screenx = rect.width
+        self.screeny = rect.height
+        a,b,c,d,e,f = self.maxdim()
+        self.ppmm = min(self.screenx/(b-a),self.screeny/(d-c)) * 0.9
+        self.mmdx = (a+b)/2
+        self.mmdy = (c+d)/2
+        #self.drawStations(widget, cr)
+        self.drawStationsDebug(widget, cr) #Debug: Radien mit einzeichnen
+        self.drawObstacles(widget, cr)
+        self.drawPositions(widget, cr)
+        self.drawLegend(widget, cr)
+        self.drawWaypoints(widget, cr)
+        self.drawBlimp(widget, cr)
+        pass
+    def mm2p(self,mmx,mmy):
+        x = (mmx - self.mmdx) * self.ppmm + self.screenx/2
+        y = (self.mmdy - mmy) * self.ppmm + self.screeny/2
+        return x,y
+    def mm2px(self,mmx):
+        x = (mmx - self.mmdx) * self.ppmm + self.screenx/2
+        return x
+    def mm2py(self,mmy):
+        y = (self.mmdy - mmy) * self.ppmm + self.screeny/2
+        return y
+    def maxdim(self):
+        a,b,c,d,e,f = -3000,3000,-3000,3000,0,3000 #TODO: Maximalwerte bestimmen
+        return a,b,c,d,e,f
+    def drawBlimp(self, widget, cr):
+        self.roti = self.roti + 1 #debug
+        angle = self.roti/360.0 * math.pi*2 #TODO: Kompasswert oder Bewegungsrichtung aus letzten Messungen
+        rotx = self.rotx
+        roty = self.roty
+        cr.set_line_width(2)
+        cr.set_source_rgb(1, 0, 0)
+        cr.move_to(self.mm2px(posx)+rotx(-9,9,angle), self.mm2py(posy)+roty(-9,9,angle))
+        cr.line_to(self.mm2px(posx)+rotx(0,-12,angle), self.mm2py(posy)+roty(0,-12,angle))
+        cr.line_to(self.mm2px(posx)+rotx(9,9,angle), self.mm2py(posy)+roty(9,9,angle))
+        cr.line_to(self.mm2px(posx)+rotx(0,3,angle), self.mm2py(posy)+roty(0,3,angle))
+        cr.close_path()
+        #cr.arc(self.mm2px(posx), self.mm2py(posy), 6, 0, 2 * math.pi)
+        cr.stroke_preserve()
+        cr.set_source_rgb(1, 0.5, 0.5)
+        cr.fill()
+        pass
+    def rotx(self,x,y,angle): #Hilfsfunktion für drawBlimp
+        return x*math.cos(angle)+y*math.sin(angle)
+    def roty(self,x,y,angle):
+        return -x*math.sin(angle)+y*math.cos(angle)
+    def drawWaypoints(self, widget, cr):
+        #TODO: Wegpunkte, Spline (B-Spline) oder Bézierkurve
+        pass
+    def drawStations(self, widget, cr):
         millis = int(round(time.time() * 1000))
         cr.set_line_width(1)
         for station in stations:
             if (millis - station[4]) < 1500:
                 cr.set_source_rgb(0, 1, 0)
-                cr.arc(station[0]/16 + 256, station[1]/16 + 256, 2, 0, 2 * math.pi)
+                cr.arc(self.mm2px(station[0]), self.mm2py(station[1]), 2, 0, 2 * math.pi)
+                cr.stroke()
+                #TODO: Stationsnummer dazu
+        pass
+    def drawStationsDebug(self, widget, cr):
+        millis = int(round(time.time() * 1000))
+        cr.set_line_width(1)
+        for station in stations:
+            if (millis - station[4]) < 1500:
+                cr.set_source_rgb(0, 1, 0)
+                cr.arc(self.mm2px(station[0]), self.mm2py(station[1]), 2, 0, 2 * math.pi)
                 cr.stroke()
                 cr.set_source_rgb(0.6, 0.9, 0.6)
-                cr.arc(station[0]/16 + 256, station[1]/16 + 256, station[3]/16, 0, 2 * math.pi)
+                cr.arc(self.mm2px(station[0]), self.mm2py(station[1]), station[3]*self.ppmm, 0, 2 * math.pi)
                 cr.stroke()
                 if station[3]**2 > (posz-station[2])**2:
                     cr.set_source_rgb(0, 0, 0.7)
-                    cr.arc(station[0]/16 + 256, station[1]/16 + 256, (math.sqrt(station[3]**2 - (posz-station[2])**2 ))/16, 0, 2 * math.pi)
+                    cr.arc(self.mm2px(station[0]), self.mm2py(station[1]), (math.sqrt(station[3]**2 - (posz-station[2])**2 ))*self.ppmm, 0, 2 * math.pi)
                     cr.stroke()
-        cr.set_source_rgb(1, 0, 0)
-        cr.arc(posx/16 + 256, posy/16 + 256, 6, 0, 2 * math.pi)
-        cr.stroke_preserve()
-        cr.set_source_rgb(1, 0.5, 0.5)
-        #cr.fill()
-        #time.sleep(0.02)
-        #widget.queue_draw()
-        #GObject.idle_add(self.draw, widget, cr)
         pass
-    def drawWaypoints(self):
+    def drawObstacles(self, widget, cr):
+        #TODO
         pass
-    def drawStations(self):
+    def drawPositions(self, widget, cr):
+        #TODO: geflogene Route einzeichnen
         pass
-    def drawObstacles(self):
-        pass
-    def drawPositions(self):
-        pass
-    def drawStations(self):
-        pass
-    def drawLegend(self):
+    def drawLegend(self, widget, cr):
+        #TODO
         pass
     def onNewPos(self):
         #threading.Thread(target=self.drawingarea.queue_draw).start()
@@ -405,7 +470,7 @@ class GraphicalUserInterface(threading.Thread):
 Der EventHandler kümmert sich um auftretende Ereignisse, wie z.B. "es gibt eine neue Position", "Button 5 gedrückt", etc.
 zu den Events habe ich in die erste Zeile jeweils die Funktion geschrieben, ich hoffe das ist klar, sonst einfach fragen.
 Hier muss noch einiges ergänzt werden, siehe TODO
-Es sollten keine langwierigen Geschichten geschrieben werden ;)
+Es sollten hier keine langwierigen Geschichten geschrieben werden ;) am Besten nur Flags setzen
 """
 class EventHandler:
     def __init__(self, main):
@@ -567,6 +632,8 @@ class EventHandler:
         pass
     def on_cellrenderertext10_edited(self, widget, path, text):
         #station x
+        print (path)
+        stations[int(path)][0]=int(text)
         self.main.stationlist[path][1] = int(text)
         pass
     def on_cellrenderertext11_edited(self, widget, path, text):
@@ -624,7 +691,10 @@ class main():
         self.waypointlist = self.builder.get_object("liststore1")
         self.obstaclelist = self.builder.get_object("liststore2")
         self.stationlist = self.builder.get_object("liststore3")
-        
+        for i in range(len(stations)):
+            tmp = [i,stations[i][0],stations[i][1],stations[i][2],stations[i][3],3.8,1]
+            self.stationlist.append(tmp)
+            
         self.arduino = Arduino(self)
         self.gui = GraphicalUserInterface(self)
         #starte Thread
@@ -645,6 +715,6 @@ if __name__ == "__main__":
 """
 CHANGELOG
 2013/05/17  0.7.0.2     Kommentare eingefügt - Alexander
-
+2013/05/21  0.7.0.3     Kommentare eingefügt, Karte erweitert - Alexander
 
 """

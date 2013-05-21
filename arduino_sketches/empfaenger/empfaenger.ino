@@ -1,5 +1,5 @@
-//tracking station v0.5
-#define VERSION "v0.5"
+//tracking station v0.7
+#define VERSION "v0.7"
 #define DEVICEID 2
 
 #include <SPI.h>
