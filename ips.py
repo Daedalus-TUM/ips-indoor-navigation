@@ -2,9 +2,11 @@
 # -*- coding: iso-8859-1 -*-
 # 21.05.2013
 
-VERSION = (0,7,0,3)
+VERSION = (0,7,0,4)
 
 # Änderungen bitte im CHANGELOG unten vermerken und Versionsnummer anpassen
+#
+# Standardeinrückung: 4 Leerzeichen
 #
 # Zu den Kommentaren:
 #   * "TODO" meist steht dabei, was zu tun ist, kein Anspruch auf Vollständigkeit
@@ -210,66 +212,6 @@ class Arduino(threading.Thread):
   #terminiert den Thread
   def onExit(self):
     self.run_=0
-
-# Startfenster zur Auswahl des seriellen Ports und des Teams
-# TODO: "und los" Button soll das Fenster zerstören
-class init():
-    def __init__(self, main):
-        self.main = main
-        print(self.main.ttyport,self.main.team)
-        builder = Gtk.Builder()
-        #builder.add_from_file("/home/alex/ips/glade_gui/daedalus.glade")
-        builder.add_from_file(os.path.join(dir, 'daedalus.glade'))
-        builder.connect_signals(EventHandler(self.main))
-        window = builder.get_object("window2")
-        self.ttybox = builder.get_object("buttonbox4")
-        self.teambox = builder.get_object("buttonbox5")
-        reloadbtn = builder.get_object("button12")
-        reloadbtn.connect("pressed", self.reloadtty)
-        self.reloadtty("")
-        #add your team here DONE
-        button1 = Gtk.RadioButton(group=None, label="Alex")
-        button1.connect("toggled", self.setteam, "TeamX")
-        self.teambox.pack_start(button1, True, True, 0)
-        self.main.team = "TeamX"
-        button = Gtk.RadioButton(group=button1, label="Team1")
-        button.connect("toggled", self.setteam, "Team1")
-        self.teambox.pack_start(button, True, True, 0)
-        button = Gtk.RadioButton(group=button1, label="Team2")
-        button.connect("toggled", self.setteam, "Team2")
-        self.teambox.pack_start(button, True, True, 0)
-        button = Gtk.RadioButton(group=button1, label="Team3")
-        button.connect("toggled", self.setteam, "Team3")
-        self.teambox.pack_start(button, True, True, 0)
-        
-        # end: add team
-        window.show_all()
-        #startet das init-Fenster
-        Gtk.main()
-    def setttydev(self, button, dev):
-        if button.get_active():
-            self.main.ttyport = dev
-            print("tty=",self.main.ttyport)
-    def setteam(self, button, team_):
-        if button.get_active():
-            self.main.team = team_
-            print("team=",self.main.team)
-    def reloadtty(self, button):
-        #ladde tty ports
-        ttydevs = glob.glob('/dev/ttyUSB*') + glob.glob('/dev/ttyACM*')# + glob.glob('/dev/ttyS*')
-        for i in self.ttybox.get_children():
-            self.ttybox.remove(i)
-        if len(ttydevs) == 0:
-          print ("error: no tty Port")
-        else:
-          button = None
-          for item in ttydevs:
-            if button == None:
-                self.main.ttyport = item
-            button = Gtk.RadioButton(group=button, label=item)
-            button.connect("toggled", self.setttydev, item)
-            self.ttybox.pack_start(button, True, True, 0)
-            self.ttybox.show_all()
 
 
 # bitte kopieren mit dem Namen Team1, Team2 oder Team3
@@ -653,20 +595,84 @@ class EventHandler:
         #self.main.gui.onNewPos()
         pass
 
+# Startfenster zur Auswahl des seriellen Ports und des Teams
+# TODO: "und los" Button soll das Fenster zerstören
+class Init():
+    def __init__(self, main):
+        self.main = main
+        print(self.main.ttyport,self.main.team)
+        builder = Gtk.Builder()
+        #builder.add_from_file("/home/alex/ips/glade_gui/daedalus.glade")
+        builder.add_from_file(os.path.join(dir, 'daedalus.glade'))
+        builder.connect_signals(EventHandler(self.main))
+        window = builder.get_object("window2")
+        self.ttybox = builder.get_object("buttonbox4")
+        self.teambox = builder.get_object("buttonbox5")
+        reloadbtn = builder.get_object("button12")
+        reloadbtn.connect("pressed", self.reloadtty)
+        self.reloadtty("")
+        #add your team here DONE
+        button1 = Gtk.RadioButton(group=None, label="Alex")
+        button1.connect("toggled", self.setteam, "TeamX")
+        self.teambox.pack_start(button1, True, True, 0)
+        self.main.team = "TeamX"
+        button = Gtk.RadioButton(group=button1, label="Team1")
+        button.connect("toggled", self.setteam, "Team1")
+        self.teambox.pack_start(button, True, True, 0)
+        button = Gtk.RadioButton(group=button1, label="Team2")
+        button.connect("toggled", self.setteam, "Team2")
+        self.teambox.pack_start(button, True, True, 0)
+        button = Gtk.RadioButton(group=button1, label="Team3")
+        button.connect("toggled", self.setteam, "Team3")
+        self.teambox.pack_start(button, True, True, 0)
+        
+        # end: add team
+        window.show_all()
+        #startet das init-Fenster
+        Gtk.main()
+    def setttydev(self, button, dev):
+        if button.get_active():
+            self.main.ttyport = dev
+            print("tty=",self.main.ttyport)
+    def setteam(self, button, team_):
+        if button.get_active():
+            self.main.team = team_
+            print("team=",self.main.team)
+    def reloadtty(self, button):
+        #ladde tty ports
+        ttydevs = glob.glob('/dev/ttyUSB*') + glob.glob('/dev/ttyACM*')# + glob.glob('/dev/ttyS*')
+        for i in self.ttybox.get_children():
+            self.ttybox.remove(i)
+        if len(ttydevs) == 0:
+          print ("error: no tty Port")
+        else:
+          button = None
+          for item in ttydevs:
+            if button == None:
+                self.main.ttyport = item
+            button = Gtk.RadioButton(group=button, label=item)
+            button.connect("toggled", self.setttydev, item)
+            self.ttybox.pack_start(button, True, True, 0)
+            self.ttybox.show_all()
+
+
+
 """
 Hauptprogramm
 """
-class main():
+class Main():
     def __init__(self):
         #Gdk.threads_init()
-        # initialisiere Variablen
-        self.team = ""
-        self.ttyport = ""
-        self.waypointlist = ""
-        self.obstaclelist = ""
-        self.stationlist = ""
-        self.builder = ""
-        init(self)
+        # initialisiere Variablen, werden von initfenster beschrieben
+        self.team = 0
+        self.ttyport = 0
+        # Variablen für GUI und alles andere
+        self.waypointlist = 0
+        self.obstaclelist = 0
+        self.stationlist = 0
+        self.builder = 0
+        # Initfenster
+        Init(self)
         
         if self.team and self.ttyport:
           if self.team == "TeamX":
@@ -691,6 +697,7 @@ class main():
         self.waypointlist = self.builder.get_object("liststore1")
         self.obstaclelist = self.builder.get_object("liststore2")
         self.stationlist = self.builder.get_object("liststore3")
+        # Stationen syncronisieren mit GUI
         for i in range(len(stations)):
             tmp = [i,stations[i][0],stations[i][1],stations[i][2],stations[i][3],3.8,1]
             self.stationlist.append(tmp)
@@ -706,9 +713,10 @@ class main():
         self.gui.join()
         self.team.join()
 
-#siehe Python-Tutorial
+# siehe Python-Tutorial
+# Fall dies das Hauptprogramm ist:
 if __name__ == "__main__":
-    main()
+    Main()
 
 
 
@@ -716,5 +724,6 @@ if __name__ == "__main__":
 CHANGELOG
 2013/05/17  0.7.0.2     Kommentare eingefügt - Alexander
 2013/05/21  0.7.0.3     Kommentare eingefügt, Karte erweitert - Alexander
+2013/05/21  0.7.0.4     Kommentare eingefügt - Alexander + Philipp
 
 """
