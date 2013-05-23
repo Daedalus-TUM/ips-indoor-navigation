@@ -45,10 +45,16 @@ import os
 import glob
 import sys, traceback
 import time
-from ctypes import *
+from ctypes import * # Nicht schön
 import threading 
 import serial
 import re
+
+DEBUG = 1
+
+def debug(*args):
+    if DEBUG:
+        print(*args)
 
 dir = os.path.dirname(__file__)
 multilat=CDLL(os.path.join(dir, 'multilat.so')) #ctypes-doku
@@ -151,7 +157,7 @@ class Arduino(threading.Thread):
   global stations
   #initialisierung, wird genau einmal ausgeführt
   def __init__(self,main):
-    print ("Arduino init")
+    debug("Arduino init")
     threading.Thread.__init__(self) 
     self.ttylock = threading.Lock()
     self.main = main
@@ -163,9 +169,9 @@ class Arduino(threading.Thread):
     self.run_ = True
   #Dauerschleife, Beendet falls self.run_ == False; siehe threading-doku
   def run(self):
-    #print ("Arduino start running")
+    #debug ("Arduino start running")
     while(self.run_):
-      #print (self.s.inWaiting())
+      #debug (self.s.inWaiting())
       if (self.s.inWaiting() > 0):
         self.recv_packet()
       time.sleep(0.0005) # je nach dem wie viele Pakete verschickt werden
@@ -187,21 +193,21 @@ class Arduino(threading.Thread):
     self.ttylock.acquire() #vor jedem Zugriff aus die serialle Verbindung lock setzen
     while (self.s.inWaiting() > 0):
       res = self.s.readline()
-      #print (res)
+      #debug (res)
       #TODO: andere Pattern, falls noch andere Daten vom Arduino (nrf24) kommen
       tmp = self.pattern.search(res)
       if tmp is not None:
         deltat = float(tmp.group(2))
-        deltat = deltat * 0.345 #TODO: Temperaturanpassung, aktuell: 22°C
-        if deltat > 1:
+        distance = deltat * 0.345 #TODO: Temperaturanpassung, aktuell: 22°C
+        if distance > 1:
             stationnr = int(tmp.group(1))
             millis = int(round(time.time() * 1000))
-            stations[stationnr][3] = deltat
+            stations[stationnr][3] = distance
             stations[stationnr][4] = millis
             clib_multilat()
             self.main.eventhandler.onNewPos()
       else:
-        #print (res)
+        #debug (res)
         pass
     self.ttylock.release() # lock lösen
   #den Arduino neustarten
@@ -220,19 +226,23 @@ class TeamX(threading.Thread):
     def __init__(self, main):
         threading.Thread.__init__(self) 
         self.main = main
-        print("TeamX")
+        debug("TeamX")
         self.run_ = True
         self.start_ = 0
     def run(self):
         #i=0
         while(self.run_):
             #i=i+1
-            #print("TeamX run:",i)
+            #debug("TeamX run:",i)
             self.loop()
     def loop(self):
         if (self.start_):
             #wegpunktnavigation etc.
             #self.main.arduino.send("TeamX fliegt!\n")
+            if self.newposflag:
+                self.newposflag = False
+                #hier steht code !!!!!!!!
+                pass
             pass
         time.sleep(0.005) #schlafen ist gut, um die CPU nicht voll auszulasten
     def onStart(self):
@@ -245,15 +255,16 @@ class TeamX(threading.Thread):
         # reset etc.
         pass
     def onNewPos(self):
+        self.newposflag = True
         #globale Variablen
         #posx
         #posy
         #posz
-        #print(posx,posy,posz)
+        #debug(posx,posy,posz)
         pass
     def onButtonPressed(self, i):
         #welcher Button welche Nummer hat seht Ihr in der glade Datei oder im Eventhandler oder durch Testen
-        #print("Button ", i)
+        #debug("Button ", i)
         pass
     def onWaypointUpdate(self):
         #wegpunkt wurde in der gui geändert
@@ -574,7 +585,7 @@ class EventHandler:
         pass
     def on_cellrenderertext10_edited(self, widget, path, text):
         #station x
-        print (path)
+        debug (path)
         stations[int(path)][0]=int(text)
         self.main.stationlist[path][1] = int(text)
         pass
@@ -600,7 +611,7 @@ class EventHandler:
 class Init():
     def __init__(self, main):
         self.main = main
-        print(self.main.ttyport,self.main.team)
+        debug(self.main.ttyport,self.main.team)
         builder = Gtk.Builder()
         #builder.add_from_file("/home/alex/ips/glade_gui/daedalus.glade")
         builder.add_from_file(os.path.join(dir, 'daedalus.glade'))
@@ -633,18 +644,18 @@ class Init():
     def setttydev(self, button, dev):
         if button.get_active():
             self.main.ttyport = dev
-            print("tty=",self.main.ttyport)
+            debug("tty=",self.main.ttyport)
     def setteam(self, button, team_):
         if button.get_active():
             self.main.team = team_
-            print("team=",self.main.team)
+            debug("team=",self.main.team)
     def reloadtty(self, button):
         #ladde tty ports
         ttydevs = glob.glob('/dev/ttyUSB*') + glob.glob('/dev/ttyACM*')# + glob.glob('/dev/ttyS*')
         for i in self.ttybox.get_children():
             self.ttybox.remove(i)
         if len(ttydevs) == 0:
-          print ("error: no tty Port")
+          debug ("error: no tty Port")
         else:
           button = None
           for item in ttydevs:
@@ -684,15 +695,14 @@ class Main():
           if self.team == "Team3":
             self.team = Team3(self)
         else:
-            print("init failed, please specify a tty port and a team")
-            print(self.ttyport,self.team)
+            debug("init failed, please specify a tty port and a team")
+            debug(self.ttyport,self.team)
             sys.exit() #TODO: dem Benutzer das in der GUI beibringen, anstatt einfach das Programm zu benden
         self.builder = Gtk.Builder() #Lade GUI aus glade Datei
         self.builder.add_from_file(os.path.join(dir, 'daedalus.glade')) #TODO: Macht manchmal Probleme
         self.eventhandler = EventHandler(self)
         self.builder.connect_signals(self.eventhandler)
-        window = self.builder.get_object("window1")
-        drawingarea = self.builder.get_object("drawingarea1")
+
         #TODO: ??? in welcher Form sollen WP etc gespeichert werden?
         self.waypointlist = self.builder.get_object("liststore1")
         self.obstaclelist = self.builder.get_object("liststore2")
