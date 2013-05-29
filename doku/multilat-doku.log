@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.5.14)  29 MAY 2013 15:22
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.5.14)  29 MAY 2013 12:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -429,7 +429,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 Here is how much of TeX's memory you used:
  5411 strings out of 495007
  76249 string characters out of 3179690
- 161619 words of memory out of 3000000
+ 161607 words of memory out of 3000000
  8491 multiletter control sequences out of 15000+200000
  54665 words of font info for 56 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -444,7 +444,7 @@ s/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></
 usr/share/texmf/fonts/type1/public/lm/lmro10.pfb></usr/share/texmf/fonts/type1/
 public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on multilat-doku.pdf (2 pages, 153619 bytes).
+Output written on multilat-doku.pdf (2 pages, 153165 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
