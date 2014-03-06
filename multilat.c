@@ -1,32 +1,8 @@
-/* 
-* Multilateration zur Berechung von Positionen
-*
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*
-*
-* Autor: Markus Hefele
-*
-* Wer Numerik nicht kann, braucht gar nicht erst versuchen das hier zu verstehen.
-* Wer es sich trotzdem antun will, kann mal in die multilat-doku.pdf schauen.
-*
-* um eine shared library zu erstellen folgende zwei Befehle ausfuehren
-* gcc -c -fPIC -O3 multilat.c
-* gcc -shared -o multilat.so multilat.o
-*
-*/
-
+// Multilateration zur Berechung von Positionen
+// geschrieben von Markus
+// um eine shared library zu erstellen folgende zwei Befehle ausfuehren
+// gcc -c -fPIC multilat.c
+// gcc -shared -o multilat.so multilat.o
 
 #include <stdio.h>
 #include <math.h>
@@ -88,6 +64,7 @@ double wrapper (double station[][3], double start[3], double radius[], int nn, d
 
 
 int rechne() {
+	//double temp = 0.0;
 
 	double *richtung;
 	double schritt = 0.0;
@@ -98,39 +75,52 @@ int rechne() {
 	double y_neu = 0.0;
 	double z_neu = 0.0;
 	int i = 0;
-	
+	//test();	//test-Daten	
+
+	//double funkt = 0.0;
+	//funkt = f(x,y,z,n);
+	//printf("funktion: %lf\n",funkt);	
+
 	
 
-	while(i<300)
+	while(i<2000)
 	{
-		//Grad (google it!!)
+	  //printf("iter:%d\n",i);
 		richtung = grad_f(x,y,z,n);
-		//Schrittweite nach Armijo (google it!!)
+		//printf("richtung: %lf  ", richtung[0]);
+		//richtung[0] = -richtung[0];
+		//printf("richtung-neg: %lf  ", richtung[0]);
+		//richtung[1] = -richtung[1];
+		//richtung[2] = -richtung[2];
 		schritt = armijo(x,y,z,n);
 
 		x_neu = x - schritt*richtung[0];
 		y_neu = y - schritt*richtung[1];
 		z_neu = z - schritt*richtung[2];
 		i++;
-
 		//auf Staionaritaet pruefen
 		if (((x-x_neu)*(x-x_neu)+(y-y_neu)*(y-y_neu)+(z-z_neu)*(z-z_neu))<0.0001)
 			break;
 		x = x_neu;
 		y = y_neu;
 		z = z_neu;
-		
+		//funkt = f(x,y,z,n);
+		//printf("schritt: %lf  ",schritt);
+		//temp = schritt*richtung[0];
+		//printf("multi: %lf\n", temp);
+
 	}
 
 	x = x_neu;
 	y = y_neu;
 	z = z_neu;
     
-	posx = x;
-	posy = y;
-	posz = z;
+    posx = x;
+    posy = y;
+    posz = z;
 
-  	int ret = 0;
+	//printf("Iterationen: %i  Position: x = %lf, y = %lf, z = %lf\n",i,x,y,z);
+    int ret = 0;
 	return ret;
 }
 
@@ -144,6 +134,7 @@ double f(double x, double y, double z, int n) {
 	for(i = 0; i < n; i++)
 	{
 		zwi = (x-base_x[i])*(x-base_x[i])+(y-base_y[i])*(y-base_y[i])+(z-base_z[i])*(z-base_z[i])-r[i]*r[i];
+		//printf("zwi: %d, %lf\n", i, zwi);
 		erg3 += zwi*zwi;
 	}
 	return erg3;
@@ -162,13 +153,25 @@ double *grad_f(double x, double y, double z, int n) {
 	{
 		zwi = (x-base_x[i])*(x-base_x[i])+(y-base_y[i])*(y-base_y[i])+(z-base_z[i])*(z-base_z[i])-r[i]*r[i];
 		erg[0] += zwi * (x-base_x[i]);
+		
+
+	}
+	erg[0] = erg[0] *4;
+	//y-Komp
+	for (i = 0; i < n; i++)
+	{
+		zwi = (x-base_x[i])*(x-base_x[i])+(y-base_y[i])*(y-base_y[i])+(z-base_z[i])*(z-base_z[i])-r[i]*r[i];
 		erg[1] += zwi * (y-base_y[i]); 
+		
+	}
+	erg[1] = erg[1] *4;
+	//z-Komp
+	for (i = 0; i < n; i++)
+	{
+		zwi = (x-base_x[i])*(x-base_x[i])+(y-base_y[i])*(y-base_y[i])+(z-base_z[i])*(z-base_z[i])-r[i]*r[i];
 		erg[2] += zwi * (z-base_z[i]);
 		
 	}
-
-	erg[0] = erg[0] *4;
-	erg[1] = erg[1] *4;
 	erg[2] = erg[2] *4;
 
 
@@ -186,7 +189,7 @@ double armijo(double x, double y, double z, int n) {
 	double *gradient;
 	gradient = grad_f(x,y,z,n);
 
-	while (i < 1200)
+	while (i < 5000)
 	{
 		ls = f(x+schritt*(-gradient[0]),y+schritt*(-gradient[1]),z+schritt*(-gradient[2]),n);
 		rs = f(x,y,z,n) + 0.5*schritt*(-gradient[0]*gradient[0]-gradient[1]*gradient[1]-gradient[2]*gradient[2]);
