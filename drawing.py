@@ -29,6 +29,7 @@ class Drawing(threading.Thread):
         # Programm beenden
         self.run_=False
     def onDraw(self, widget, cr):
+        print("WABOOOOOZAAAAAAAAAAAAAAAAAAA")
         self.redraw=True
         self.widget = widget
         self.cairo = cr
