@@ -72,8 +72,8 @@ class EventHandler:
         #self.main.gui.draw(*args)
         #self.main.gui.drawing(self.main, *args)
         #thread.start_new_thread(self.main.gui.drawing, (widget, cr,))
-        #self.main.gui.drawing(widget, cr)
-        self.main.map.onDraw(widget, cr)
+        self.main.gui.drawing(widget, cr)
+        #self.main.map.onDraw(widget, cr)
     #TODO
     #buttons
     #zum Testen kann in der Methode TeamX.onButtonPressed die print Zeile einkommentiert werden

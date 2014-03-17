@@ -43,17 +43,17 @@ class GraphicalUserInterface(threading.Thread):
         pass
         
     def run(self):
-        while (self.run_):
+        ##while (self.run_):
             ##
-            Gdk.threads_enter() #Gdk.threads_enter()
+        Gdk.threads_enter() #Gdk.threads_enter()
             ##
-            Gtk.main()
+        Gtk.main()
             ##
-            Gdk.threads_leave() #Gdk.threads_leave()
+        Gdk.threads_leave() #Gdk.threads_leave()
             ##
         pass
     def draw(self, widget, cr):
-        #self.drawing(widget, cr)
+        self.drawing(widget, cr)
         #thread.start_new_thread(self.drawing, (widget, cr,)) 
         pass
     def drawing(self, widget, cr):
