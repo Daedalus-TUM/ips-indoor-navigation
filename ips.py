@@ -59,7 +59,7 @@ import gui
 import arduino
 import eventhandler
 import blowfish
-import drawing
+#import drawing
 
 print("DAEDALUS-IPS [Alexander Blum -- Markus Hefele -- Team Blowfish]")
 
@@ -323,17 +323,17 @@ class Main():
             
         self.arduino = arduino.Arduino(self)
         self.gui = gui.GraphicalUserInterface(self)
-        self.map = drawing.Drawing(self)
+        #self.map = drawing.Drawing(self)
         Gdk.threads_init()
         #starte Thread
         self.arduino.start()
         self.team.start()
         self.gui.start()
-        self.map.start()
+        #self.map.start()
         #join wartet bis Thread terminiert
         self.arduino.join()
         self.gui.join()
-        self.map.join()
+        #self.map.join()
         self.team.join()
     """
     ruft die c-lib zur Mutilateration auf, speichert die werte in posx,posy,posz
@@ -402,6 +402,6 @@ CHANGELOG
 2013/07/07  0.7.13.10    ...
 Code gemerged: ips_1_7_13_Alex.py mit ips_5_7_13.py+ ändern der Wegpunktnummer in Main möglich gemacht (Jetzt kein Warning mehr vor Start des Hauptfensters?!)+ initialisieren der Wegpunkte in der Main nun möglich+ team.onStart() und team.onStop() für Reset der Kurswinkelberechnung erweitert+ Init_Fenster schließen bewirkt jetzt Abbruch des Programms+ Paket manuell abwerfbar+ Kurswinkelbutton hinzugefügt+ Wegpunktanzeige ergänzt + Flugweg bei Start/Stop reseten nun möglich+ Hindernisse in der Gui entfernt um Größe des Fensters zu verkleinern-Thomas    
 2013/07/08  0.7.14.0    Klassen ausgelagert. 
-        
+2014/03/17  0.7.14.1    Code funktioniert wieder: Experimentelle Trennung von Karte und Interface rückgängig gemacht.
 """
 
