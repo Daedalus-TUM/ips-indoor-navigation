@@ -1,72 +1,57 @@
-<h4><span style="font-size: medium;">Funktion</span></h4>
-<hr />
-<p>Das Indoor Positioning System dient zur Positionsbestimmung eines Flugobjekten vor allem in Situationen, in denen Ortung per GPS aufgrund der Signaldämpfung durch Decken und Wände nicht möglich oder aus anderen Gründen ungünstig ist.<br />Dieser Artikel enthält alle wichtigen Informationen zur Funktionsweise sowie detaillierte Anweisungen zur Inbetriebnahme des Systems.</p>
-<p><img src="images/Wiki/Anleitungen/ips/funktionV2.jpg" border="0" /></p>
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content=" Supersonik Hyperphonik Indoor Positioning System : Positionsbestimmung basierend auf Ultraschallsignaldetektion" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title> Supersonik Hyperphonik Indoor Positioning System</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View on GitHub</a>
+
+          <h1 id="project_title"> Supersonik Hyperphonik Indoor Positioning System</h1>
+          <h2 id="project_tagline">Positionsbestimmung basierend auf Ultraschallsignaldetektion</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Daedalus-TUM/ips-indoor-navigation/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Daedalus-TUM/ips-indoor-navigation/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="willkommen-auf-der-projektseite-des-indoor-positioning-system-der-daedalus-gruppe-der-tu-m%C3%BCnchen" class="anchor" href="#willkommen-auf-der-projektseite-des-indoor-positioning-system-der-daedalus-gruppe-der-tu-m%C3%BCnchen"><span class="octicon octicon-link"></span></a>Willkommen auf der Projektseite des Indoor Positioning System der Daedalus Gruppe der TU München.</h3>
+
+<p>Das Indoor Positioning System dient zur Positionsbestimmung eines Flugobjekten vor allem in Situationen, in denen Ortung per GPS aufgrund der Signaldämpfung durch Decken und Wände nicht möglich oder aus anderen Gründen ungünstig ist.
+Dieser Artikel enthält alle wichtigen Informationen zur Funktionsweise sowie detaillierte Anweisungen zur Inbetriebnahme des Systems.</p>
+
+<p><img src="https://github.com/Daedalus-TUM/ips-indoor-navigation/raw/gh-pages/pics/funktionV2.jpg" alt=""></p>
+
 <p>Das Indoor Positioning System basiert auf der Laufzeitmessung von Ultraschallwellen. Gleichzeitig vom Flugobjekt ausgesandte Infrarot- und Ultraschallsignale werden von fest installierten Bodenstationen empfangen. Die dabei auftretende Zeitdifferenz zwischen der Ankunft des Infrarotsignals und des Ultraschallsignals wird an die Basisstation durch Funkübertragung weitergeleitet. Der an die Basisstation angeschlossene Rechner kann nun aus den übertragenen Daten mittels Triangulationsverfahren die Position des Flugobjektes bestimmen.</p>
-<p> </p>
-<h4><span style="font-size: medium;">Hardware</span></h4>
-<hr />
-<p><strong>Bestandsliste:</strong></p>
-<p style="padding-left: 30px;">7   Bodenstationen<br />1   Gondelmodul<br />1   Basismodul (+Funkmodul mit Antenne)<br />9   Akkus</p>
-<p><img src="images/Wiki/Anleitungen/ips/P1000257.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000258.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000259.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000262.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Projekte/Indoornavigation/Schaltplan.png" border="0" alt="" height="150" /><img src="images/Wiki/Projekte/Indoornavigation/board.png" border="0" alt="" height="150" /></p>
-<p><strong>Bodenstationen<br /></strong>Die Bodenstationen empfangen die von der Gondel ausgesandten Impulse und leitet die gemessene Zeitdifferenz zwischen Infrarot- und Ultraschallimpuls an das Basismodul weiter.</p>
-<p style="padding-left: 30px;">Microcontroller:      ATmega8<br />Funkmodul:           NRF24L01</p>
-<p><strong> </strong></p>
-<p><img src="images/Wiki/Anleitungen/ips/P1000269.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000270.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000273.JPG" border="0" alt="" height="150" /></p>
-<p><strong>Gondelmodul<br /></strong>Das Gondelmodul ist am Heliumballon angebracht und ist für die Erzeugung der zur Positionsbestimmung notwendigen Ultraschall- und Infrarotimpulse zuständig. Dazu werden je sechs ringförmig angeordnete, parallel verschaltete Ultraschallwandler und Infrarot-LED verwendet. Die Ultraschallwandler werden über einen Motortreiber angesteuert. Die Infrarot-LEDs sind für eine Spannung von 5 Volt ausgelegt und sollten nicht direkt an einem Mikrocontrollerpin betrieben werden, da kurzzeitig Ströme von 100 mA fließen. Hier ist eine einfache Transistorschaltung zweckmäßig.<br />Im eingeschalteten Zustand sendet das Gondelmodul kontinuierlich eine Pulsfolge von 8 Takten bei 40kHz Frequenz alle 200ms. Diese gleichzeitig gesendeten Pulsfolgen werden mit entsprechender Zeitdifferenz zwischen Ultraschall und Infrarot von den Basisstationen aufgefangen.</p>
-<p style="padding-left: 30px;">Microcontroller:       ATmega328<br />Funkmodul:            NRF24L01<br />Ultraschalltreiber:    Sparkfun Motor Driver 1A Dual TB6612FNG</p>
-<p><strong> </strong></p>
-<p><img src="images/Wiki/Anleitungen/ips/P1000265.JPG" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/P1000267.JPG" border="0" alt="" height="150" /></p>
-<p><strong>Basismodul</strong><br />Das Basismodul leitet die von den Bodenstationen gemessenen Daten an den angeschlossenen Computer weiter und sendet Steuerbefehle an das Gondelmodul. Zur Verbesserung der Funkverbindung kann eine Antenne verwendet werden. Zu Beachten ist der korrekte Anschluss des Funkmoduls an den 3.3V Ausgang des Arduino.</p>
-<p style="padding-left: 30px;">Microcontroller:      ATmega328<br />Funkmodul:           NRF24L01</p>
-<p><strong> </strong></p>
-<p><img src="images/Wiki/Anleitungen/ips/P1000275.JPG" border="0" alt="" height="150" /></p>
-<p><strong>Akkus<br /></strong>Zum Betrieb des IPS werden LiPo Akkus verwendet. Die Bodenstationen werden in den neueren Versionen von 7,4V Akkupacks betrieben, einige ältere Versionen verwenden 3.7V Akkus. Das Gondelmodul wird an einen 3.7V Akku angeschlossen. Alle zum Betrieb des IPS verwendeten Akkus müssen in der zum IPS-Projekt gehörigen Kiste aufbewahrt werden.</p>
-<p> </p>
-<p>Vor Verwendung des IPS sollte darauf geachtet werden, dass alle Teile des IPS vollständig mit allen Bauteilen bestückt sind (v.a. IC, Funkmodul, IR/Ultraschallempfänger) und dass alle Akkus geladen sind. Zum Aufladen der Akkus der Bodenstationen befindet sich ein Adapter in der IPS-Kiste. <br />Beim Aufbau des Systems ist zu beachten, dass die maximale Distanz der Funkmodule bei ca. 50m (Sichtkontakt) liegt, die der IR/US Signale bei ca. 12m. Ist der Aufbau des Systems auf einem größeren Gebiet geplant, so ist darauf zu achten, dass die Gondel stets in IR/US Reichweite von mindestens drei Bodenstationen ist. Es ist ratsam, die Positionen der Bodenstationen deutlich zu markieren, um Unfällen vorzubeugen.<br />Um die Akkulaufzeit der Bodenstationen sowie des Gondelmoduls zu erhöhen sollte das Gondelmodul zwischen den Testphasen ausgeschaltet werden, da die Bodenstationen nicht senden solange keine Signale empfangen werden und sich somit in einem stromsparenden Leerlauf befinden.</p>
-<p> </p>
-<h4><span style="font-size: medium;">Software</span></h4>
-<hr />
-<h4><span style="font-size: small;">Software-Voraussetzungen:</span></h4>
-<p>Um die IPS-Software starten zu können, müssen die folgenden Elemente installiert sein:</p>
-<p>Python 3<br />Python 3 packages: python3-gi python3-gi python3-gi-cairo python3-all python3-regex python3-serial python3-gobject</p>
-<p>GTK3+</p>
-<p>Arduino<br />Arduino Library zur Verwendung des Nrf24L01 Funk-Moduls (Mirf.h)</p>
-<p>Nach Installation der Python packages muss der Computer evtl. neu gestartet werden.</p>
-<p><img src="images/Wiki/Anleitungen/ips/IPSpy1.jpg" border="0" alt="" height="150" /><img src="images/Wiki/Anleitungen/ips/IPSpy2.jpg" border="0" alt="" height="150" /></p>
-<h4><span style="font-size: small;">Überblick</span></h4>
-<p><strong>Arduino-Sketches</strong><br />Die zu den Bodenstationen und der Basisstation gehörigen Arduino-Sketches sind als empfänger.ino und basis.ino vorzufinden. Um die GUI zu testen kann test2.ino auf ein Arduino-Board geladen werden. Um Software-Updates an den Bodenstationen oder dem Gondelmodul vorzunehmen, muss ein FTDI Adapter verwendet werden.</p>
-<p><strong>Triangulation</strong><br />Um aus den von den Bodenstationen empfangenen Daten die Position des Flugobjektes durch Triangulation zu ermitteln, wird aus Gründen höherer Rechengeschwindigkeit ein Programm in C verwendet. Dieses ist im IPS-Ordner auf github unter dem Namen multilat.c zu finden. Weitere Dokumentation zu diesem Programm findet sich im Ordner 'doku'.</p>
-<p><strong>Graphische Oberfläche</strong><br />Die folgenden Dateien sind für die GUI relevant:</p>
-<ul style="list-style-type: circle;">
-<li>daedalus.glade: Definition des GUI</li>
-<li>gui.py: Beinhaltet den GTK main thread</li>
-<li>eventhandler.py: Behandelt auftretende Ereignisse</li>
-</ul>
-<p><br /><strong>Zentrale Schnittstelle</strong><br />Die Main-Funktion befindet sich in der Datei ips.py. Hier wird auch die Navigationssoftware der Team.py-Dateien in das System integriert, sodass die vom Computer berechneten Steuerbefehle eines Autopiloten an das Flugobjekt übermittelt werden können.<br />Um einen Autopiloten mit IPS-Unterstützung zu erstellen, muss der entsprechende Programmcode in der Datei ips.py importiert werden. Hier am Beispiel 'TeamX.py':</p>
-<pre class="brush:python">import TeamX
-</pre>
-<p class="brush:applescript">und in der Main Funktion angesprochen mit</p>
-<pre class="brush:python">        if self.team and self.ttyport:
-          if self.team == "TeamX":
-            self.team = TeamX.TeamX(self</pre>
-<p><img src="images/Wiki/Anleitungen/ips/flow.jpg" border="0" alt="" height="150" /></p>
-<h4><span style="font-size: small;">Kommunikation<br /></span></h4>
-<p><span style="font-size: small;">Die Kommunikation zwischen der Basisstation und den Bodenstationen erfolgt durch die Übertragung von Paketen in der Form eines Arrays der Länge 12 Byte. Davon belegen die Identifikationsnummern des Empfängers und des Senders sowie der Typ der Nachricht die ersten beiden Bytes. An fünfter und sechster Stelle wird über eine 16-Bit Zahl die Identifikation des zu übermittelnden Paketes ermöglicht sodass Pakete auch mit einer Verzögerung korrekt eingeordnet werden können. Die letzten 7 Byte beinhalten die von der Station gemessenen Daten.<br /></span></p>
-<p><span style="font-size: small;">       [Empfänger, ID, Typ, PaketID(2), Daten(7)]<br /></span></p>
-<h4><span style="font-size: small;">Verwendung</span></h4>
-<p>Um die Software verwenden zu können, muss die Basisstation oder ein Arduino-Board an den PC angeschlossen sein. Zum Start des Programmes wird die Datei run.sh ausgeführt. Im erscheinenden Fenster kann die zu verwendende Navigationssoftware ausgewählt werden. Ist die Basisstation angeschlossen, so öffnet sich nun die Karte. <br />Zur weiteren Konfiguration befinden sich drei Register am linken Fensterrand. Im Register Navigation können die Positionen neuer Wegpunkte oder Bodenstationen eingefügt werden oder bereits vorhandene bearbeitet werden. Das Register Command erlaubt es dem Zeppelin diverse Befehle zu erteilen sowie zur Veranschaulichung der laufenden Berechnungen die Entfernungsradien zu den Wegpunkten in der Karte einzuzeichnen. Das Register Infos gibt die aktuelle Position, Geschwindigkeit und Akkuladung des Zeppelins an.</p>
-<p>Auf der Karte, die den rechten Teil des Fensters einnimmt, sind die Wegpunkte, die Bodenstationen, die aktuelle Position des Zeppelins sowie dessen Pfad eingezeichnet. Die Größe der Karte richtet sich nach der Größe des Feldes das die Bodenstationen aufspannen. Ist eine Bodenstation für die Basisstation nicht erreichbar, so wird sie auf der Karte rot eingezeichnet. Ist sie erreichbar und funktionsfähig, so is sie grün eingezeichnet und die gemessene Distanz zum Zeppelin kann als Kreis um die Bodenstation eingezeichnet werden. Die Position des Zeppelins kann nur dann aktualisiert werden, wenn mindestens drei Bodenstationen grün eingezeichnet sind. Die Höhe des Zeppelins ist an der Farbe des eingezeichneten Pfades zu erkennen. Die verwendete Farbskala passt sich dynamisch an die während dem Flug vorkommenden Höhenwerte an.</p>
-<p>Die Software des IPS-Projektes ist auf github.com zu finden (siehe Unterpunkt Links) und sollte dort stets auf dem neuesten Stand gehalten werden. Weiterhin ist darauf zu achten, dass alle Teile des IPS kompatible Software verwenden und die für den Versuchsaufbau notwendigen Einstellungen in der Software bezüglich der Positionen der Bodenstationen vorgenommen wurden.</p>
-<p> </p>
-<h4><span style="font-size: small;">Alternative: Steuersoftware in C++</span></h4>
-<p><span style="font-size: small;">Alternativ zur Python-Steuersoftware kann eine Steuersoftware in C++ verwendet werden. Diese ist ausführlich dokumentiert unter <a href="index.php?option=com_content&amp;view=article&amp;id=317&amp;catid=68&amp;Itemid=37012">Sturzflug: Offboard Software</a><br /></span></p>
-<p> </p>
-<h4><span style="font-size: medium;">Checklist</span></h4>
-<hr />
-<p>Zur Inbetriebnahme des IPS<span style="background-color: #ff0000;"> .............</span></p>
-<p> </p>
-<h4><span style="font-size: small;"><span style="font-size: medium;">Links</span></span></h4>
-<hr />
-<p><span style="text-decoration: underline;">Bisherige IPS-Projekte:</span><br /><a href="index.php?option=com_content&amp;view=article&amp;id=154&amp;catid=36&amp;Itemid=35724">Ultraschall Positionsbestimmung</a><span style="text-decoration: underline;"><br /></span><a href="index.php?option=com_content&amp;view=article&amp;id=254&amp;catid=64&amp;Itemid=35815">Tragbares Indoor Navigationssystem</a><a href="index.php?option=com_content&amp;view=article&amp;id=274&amp;catid=65&amp;Itemid=35837"><br />Gemeinsames IPS</a></p>
-<p><span style="text-decoration: underline;">Externe Links:</span><br /><a class="wiki external" href="https://github.com/Daedalus-TUM/ips-indoor-navigation" target="_blank" title="Github IPS Projekt">Github Präsenz des IPS Projektes</a><br /><a class="wiki external" href="http://python-gtk-3-tutorial.readthedocs.org/en/latest/index.html" target="_blank" title="Python GTK+ 3 Tutorial">Python GTK+ 3 Tutorial<br /></a><a class="wiki external" href="http://www.ladyada.net/learn/arduino/index.html" target="_blank" title="Arduino Tutorial">Arduino Tutorial<br /></a><a class="wiki external" href="http://playground.arduino.cc/InterfacingWithHardware/Nrf24L01#.Uxbdz-DSXVM" target="_blank" title="Quelle der Mirf Library">Arduino Library zur Verwendung des Nrf24L01 Funkmoduls (Mirf)</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright"> Supersonik Hyperphonik Indoor Positioning System maintained by <a href="https://github.com/Daedalus-TUM">Daedalus-TUM</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
