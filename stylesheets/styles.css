@@ -160,7 +160,7 @@ header ul a strong {
   color:#222;
 }
 
-header ul ul {
+header ul ul strong{
   padding-top:10px;
   font-size:14px;
   color:#222;
