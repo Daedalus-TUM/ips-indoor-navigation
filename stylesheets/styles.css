@@ -169,6 +169,11 @@ header ul ul {
   font-weight:700;
 }
 
+header ul ul submenu {
+  width: 180px;
+  float: right;
+}
+
 section {
   width:500px;
   float:right;
