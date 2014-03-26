@@ -143,6 +143,7 @@ strong {
   font-weight:700;
 }
 
+/*
 header ul li + li {
   width:88px;
   border-left:1px solid #fff;
@@ -152,7 +153,7 @@ header ul li + li + li {
   border-right:none;
   width:89px;
 }
-
+*/
 header ul a strong {
   font-size:14px;
   display:block;
