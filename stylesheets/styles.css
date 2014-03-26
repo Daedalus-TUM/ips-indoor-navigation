@@ -159,6 +159,13 @@ header ul a strong {
   color:#222;
 }
 
+header ul ul ul {
+  padding-top:10px;
+  font-size:14px;
+  color:#222;
+  text-align:center;
+}
+
 section {
   width:500px;
   float:right;
@@ -184,7 +191,7 @@ footer {
 }
 
 
-//////////////////++MENU++//////////////////// 
+/*/////////////////++MENU++//////////////////// 
 
 
 #cssmenu,
@@ -257,7 +264,7 @@ footer {
   border: 5px solid transparent;
   border-top: 5px solid #4e5800;
 }
-/* Sub menu */
+/* Sub menu 
 #cssmenu ul ul {
   padding: 0;
   display: none;
@@ -278,7 +285,7 @@ footer {
   border: none;
 }
 
- ////////////////////--MENU--//////////////////////// 
+ ////////////////////--MENU--///////////////////////*/ 
 
 @media print, screen and (max-width: 960px) {
   
