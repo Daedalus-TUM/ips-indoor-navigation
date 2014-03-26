@@ -1,8 +1,8 @@
 $( document ).ready(function() {
-$('header ul ul li:odd').addClass('odd');
-$('header ul ul li:even').addClass('even');
-$('header > ul > li > a').click(function() {
-  $('header li').removeClass('active');
+$('wrapper header ul ul li:odd').addClass('odd');
+$('wrapper header ul ul li:even').addClass('even');
+$('wrapper header > ul > li > a').click(function() {
+  $('wrapper header li').removeClass('active');
   $(this).closest('li').addClass('active');	
   var checkElement = $(this).next();
   if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
@@ -10,7 +10,7 @@ $('header > ul > li > a').click(function() {
     checkElement.slideUp('normal');
   }
   if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
-    $('header ul ul:visible').slideUp('normal');
+    $('wrapper header ul ul:visible').slideUp('normal');
     checkElement.slideDown('normal');
   }
   if($(this).closest('li').find('ul').children().length == 0) {
