@@ -1,8 +1,8 @@
 $( document ).ready(function() {
-$('wrapper header ul ul li:odd').addClass('odd');
-$('wrapper header ul ul li:even').addClass('even');
-$('wrapper header > ul > li > a').click(function() {
-  $('wrapper header li').removeClass('active');
+$('wrapper ul ul li:odd').addClass('odd');
+$('wrapper ul ul li:even').addClass('even');
+$('wrapper > ul > li > a').click(function() {
+  $('wrapper li').removeClass('active');
   $(this).closest('li').addClass('active');	
   var checkElement = $(this).next();
   if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
