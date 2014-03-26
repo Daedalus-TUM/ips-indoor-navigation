@@ -122,9 +122,9 @@ header ul {
 }
 
 header li {
-  /*width:89px;
+  width:89px;
   float:left;
-  border-right:1px solid #d2d2d2;*/
+  border-right:1px solid #d2d2d2;
   height:40px;
 }
 
@@ -144,13 +144,13 @@ strong {
 }
 
 header ul li + li {
-  /*width:88px;
-  border-left:1px solid #fff;*/
+  width:88px;
+  border-left:1px solid #fff;
 }
 
 header ul li + li + li {
- /* border-right:none;
-  width:89px;*/
+  border-right:none;
+  width:89px;
 }
 
 header ul a strong {
@@ -159,7 +159,7 @@ header ul a strong {
   color:#222;
 }
 
-header ul menu {
+header ul ul {
   padding-top:10px;
   font-size:14px;
   color:#222;
