@@ -168,8 +168,6 @@ header menu {
   text-align:center;
   height:26px;
   font-weight:700;
-
-  list-style:none;
   
   padding:0;
   
@@ -180,17 +178,19 @@ header menu {
   background: -o-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
   background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
   background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+
+  border-radius:2px;
+  border:1px solid #d2d2d2;
+  width:270px;
+  height:40px;
   
 }
 
 header menu submenu {
-  background: #fff;
   display:block;
-  width: 180px;
-  font-size:12px;
+  font-size:13px;
   float: right;
-  height: 24px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 section {
