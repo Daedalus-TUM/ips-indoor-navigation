@@ -189,7 +189,7 @@ header menu submenu {
   display:block;
   font-size:13px;
   text-align: right;
-  padding-top: 0px;
+  padding-top: -6px;
   padding-right: 10px;
   font-weight: 500;
 }
@@ -214,6 +214,7 @@ hr {
 footer {
   width:270px;
   float:left;
+  float:bottom;
   bottom:50px;
 }
 
