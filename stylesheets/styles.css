@@ -163,10 +163,12 @@ header ul a strong {
 header menu {
   font-size:14px;
   color:#222;
+  line-height:
   text-align:center;
   height:26px;
   font-weight:700;
   display: block;
+  padding: 0;
   
   margin:8px 0px;
   background: #eee;
@@ -180,7 +182,6 @@ header menu {
   border:1px solid #d2d2d2;
   width:270px;
 
-  padding:0;
   
 }
 
