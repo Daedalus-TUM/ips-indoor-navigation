@@ -185,7 +185,7 @@ header menu {
 
 }
 
-header menu submenu {
+header menu submenu a {
   display:block;
   font-size:13px;
   text-align: right;
