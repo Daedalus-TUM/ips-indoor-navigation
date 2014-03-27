@@ -191,7 +191,7 @@ header menu submenu {
   text-align: right;
   padding-right: 10px;
   font-weight: 500;
-  margin:0px;
+  margin:-6px 0px;
 }
 
 section {
@@ -214,7 +214,6 @@ hr {
 footer {
   width:270px;
   float:left;
-  position:fixed;
   bottom:50px;
 }
 
