@@ -161,6 +161,7 @@ header ul a strong {
 }
 
 header ul ul {
+  border-radius:2px;
   padding-top:9px;
   font-size:14px;
   color:#222;
