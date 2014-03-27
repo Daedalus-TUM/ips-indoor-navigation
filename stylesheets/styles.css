@@ -161,8 +161,7 @@ header ul a strong {
 }
 
 header menu {
-  border-radius:2px;
-  padding-top:6px;
+  padding-top:8px;
   font-size:14px;
   color:#222;
   text-align:center;
@@ -179,7 +178,6 @@ header menu {
   background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
   background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
 
-  border-radius:2px;
   border:1px solid #d2d2d2;
   width:270px;
 }
