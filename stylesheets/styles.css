@@ -162,21 +162,35 @@ header ul a strong {
 
 header menu {
   border-radius:2px;
-  padding-top:9px;
+  padding-top:6px;
   font-size:14px;
   color:#222;
   text-align:center;
-  height:31px;
+  height:26px;
   font-weight:700;
+
+  list-style:none;
+  
+  padding:0;
+  
+  background: #eee;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -o-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  
 }
 
 header menu submenu {
-  background: #fff
-  display:block
+  background: #fff;
+  display:block;
   width: 180px;
-  font-size:12px
+  font-size:12px;
   float: right;
-  height: 24px:
+  height: 24px;
+  font-weight: 400;
 }
 
 section {
