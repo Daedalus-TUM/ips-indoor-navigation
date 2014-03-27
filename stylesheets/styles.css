@@ -189,9 +189,9 @@ header menu submenu a {
   display:block;
   font-size:13px;
   text-align: right;
-  padding-top: -6px;
   padding-right: 10px;
   font-weight: 500;
+  width: 200px;
 }
 
 section {
