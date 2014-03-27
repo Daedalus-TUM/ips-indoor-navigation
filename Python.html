@@ -25,44 +25,29 @@
           <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/tarball/master">Download <strong>TAR Ball</strong></a></li>
           <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View On <strong>GitHub</strong></a></li>
         </ul>
-	
-	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/index.html">    Überblick</menu>
-	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/join.html">    Mitmachen</menu>
-	<menu>    Hardware</menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</submenu></menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Basisstation.html"> Basisstation</submenu></menu>
-        <menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</submenu></menu>
-	<menu>    Software</menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Python.html"> Python</submenu></menu>
-        <menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/C++.html"> C++</submenu></menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Arduino.html"> Arduino</submenu></menu>
-	<menu>    Anwendungen</menu>
-	
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/index.html">Überblick</a></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Mitmachen.html">Mitmachen</a></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Hardware.html">Hardware</a></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</a></submenu></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Basisstation.html"> Basisstation</a></submenu></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</a></submenu></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Software.html">Software</a></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Python.html"> Python</submenu></a></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/C++.html"> C++</submenu></a></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Arduino.html"> Arduino</submenu></a></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Anwendung.html">Anwendung</a></menu>
        </header>
       <section>
         <h3>
-<a name="Hardware: Bodenstationen"><span class="octicon octicon-link"></span></a>Sotware - Python</h3>
+<a name="willkommen-auf-der-projektseite-des-indoor-positioning-system-der-daedalus-gruppe-der-tu-m%C3%BCnchen" class="anchor" href="#willkommen-auf-der-projektseite-des-indoor-positioning-system-der-daedalus-gruppe-der-tu-m%C3%BCnchen"><span class="octicon octicon-link"></span></a>Willkommen auf der Projektseite des Indoor Positioning System der Daedalus Gruppe der Technischen Universität München.</h3>
 
-<span style="font-size: small;">Überblick</span></h4>
-<p><strong>Arduino-Sketches</strong><br>Die zu den Bodenstationen und der Basisstation gehörigen Arduino-Sketches sind als empfänger.ino und basis.ino vorzufinden. Um die GUI zu testen kann test2.ino auf ein Arduino-Board geladen werden. Um Software-Updates an den Bodenstationen oder dem Gondelmodul vorzunehmen, muss ein FTDI Adapter verwendet werden.</p>
-<p><strong>Triangulation</strong><br>Um aus den von den Bodenstationen empfangenen Daten die Position des Flugobjektes durch Triangulation zu ermitteln, wird aus Gründen höherer Rechengeschwindigkeit ein Programm in C verwendet. Dieses ist im IPS-Ordner auf github unter dem Namen multilat.c zu finden. Weitere Dokumentation zu diesem Programm findet sich im Ordner 'doku'.</p>
-<p><strong>Graphische Oberfläche</strong><br>Die folgenden Dateien sind für die GUI relevant:</p>
-<ul style="list-style-type: circle;">
-<li>daedalus.glade: Definition des GUI</li>
-<li>gui.py: Beinhaltet den GTK main thread</li>
-<li>eventhandler.py: Behandelt auftretende Ereignisse</li>
-</ul>
-<p><br><strong>Zentrale Schnittstelle</strong><br>Die Main-Funktion befindet sich in der Datei ips.py. Hier wird auch die Navigationssoftware der Team.py-Dateien in das System integriert, sodass die vom Computer berechneten Steuerbefehle eines Autopiloten an das Flugobjekt übermittelt werden können.<br>Um einen Autopiloten mit IPS-Unterstützung zu erstellen, muss der entsprechende Programmcode in der Datei ips.py importiert werden. Hier am Beispiel 'TeamX.py':</p>
-<div><div id="highlighter_520239" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">import</code> <code class="python plain">TeamX</code></div></div></td></tr></tbody></table></div></div>
-<p class="brush:applescript">und in der Main Funktion angesprochen mit</p>
-<div><div id="highlighter_711102" class="syntaxhighlighter  python"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="python keyword">if</code> <code class="python color1">self</code><code class="python plain">.team </code><code class="python keyword">and</code> <code class="python color1">self</code><code class="python plain">.ttyport:</code></div><div class="line number2 index1 alt1"><code class="python spaces">&nbsp;&nbsp;</code><code class="python keyword">if</code> <code class="python color1">self</code><code class="python plain">.team </code><code class="python keyword">=</code><code class="python keyword">=</code> <code class="python string">"TeamX"</code><code class="python plain">:</code></div><div class="line number3 index2 alt2"><code class="python spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="python color1">self</code><code class="python plain">.team </code><code class="python keyword">=</code> <code class="python plain">TeamX.TeamX(</code><code class="python color1">self</code></div></div></td></tr></tbody></table></div></div>
-<p><a class="linkthumb modal" target="_blank" rel="lightbox[id_0]" href="/images/Wiki/Anleitungen/ips/flow.jpg"><img src="/cache/1/310821852da64cae53081571a7ddd847.jpg" style="display: inline;" original="/cache/1/310821852da64cae53081571a7ddd847.jpg" class="thumb" border="0" height="150" width="154"></a></p>
-<h4><span style="font-size: small;">Kommunikation<br></span></h4>
-<p><span style="font-size: small;">Die Kommunikation zwischen der Basisstation und den Bodenstationen erfolgt durch die Übertragung von Paketen in der Form eines Arrays der Länge 12 Byte. Davon belegen die Identifikationsnummern des Empfängers und des Senders sowie der Typ der Nachricht die ersten beiden Bytes. An fünfter und sechster Stelle wird über eine 16-Bit Zahl die Identifikation des zu übermittelnden Paketes ermöglicht sodass Pakete auch mit einer Verzögerung korrekt eingeordnet werden können. Die letzten 7 Byte beinhalten die von der Station gemessenen Daten.<br></span></p>
-<p><span style="font-size: small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Empfänger, ID, Typ, PaketID(2), Daten(7)]<br></span></p>
-<h4><span style="font-size: small;">Verwendung</span></h4>
-<p>Um die Software verwenden zu können, muss die Basisstation oder ein Arduino-Board an den PC angeschlossen sein. Zum Start des Programmes wird die Datei run.sh ausgeführt. Im erscheinenden Fenster kann die zu verwendende Navigationssoftware ausgewählt werden. Ist die Basisstation angeschlossen, so öffnet sich nun die Karte. <br>Zur weiteren Konfiguration befinden sich drei Register am linken Fensterrand. Im Register Navigation können die Positionen neuer Wegpunkte oder Bodenstationen eingefügt werden oder bereits vorhandene bearbeitet werden. Das Register Command erlaubt es dem Zeppelin diverse Befehle zu erteilen sowie zur Veranschaulichung der laufenden Berechnungen die Entfernungsradien zu den Wegpunkten in der Karte einzuzeichnen. Das Register Infos gibt die aktuelle Position, Geschwindigkeit und Akkuladung des Zeppelins an.</p>
-<p>Auf der Karte, die den rechten Teil des Fensters einnimmt, sind die Wegpunkte, die Bodenstationen, die aktuelle Position des Zeppelins sowie dessen Pfad eingezeichnet. Die Größe der Karte richtet sich nach der Größe des Feldes das die Bodenstationen aufspannen. Ist eine Bodenstation für die Basisstation nicht erreichbar, so wird sie auf der Karte rot eingezeichnet. Ist sie erreichbar und funktionsfähig, so is sie grün eingezeichnet und die gemessene Distanz zum Zeppelin kann als Kreis um die Bodenstation eingezeichnet werden. Die Position des Zeppelins kann nur dann aktualisiert werden, wenn mindestens drei Bodenstationen grün eingezeichnet sind. Die Höhe des Zeppelins ist an der Farbe des eingezeichneten Pfades zu erkennen. Die verwendete Farbskala passt sich dynamisch an die während dem Flug vorkommenden Höhenwerte an.</p>
+<p>Das Indoor Positioning System dient zur Positionsbestimmung eines Flugobjektes vor allem in Situationen, in denen Ortung per GPS aufgrund der Signaldämpfung durch Decken und Wände nicht möglich oder aus anderen Gründen ungünstig ist.</p>
+
+<p><img src="https://github.com/Daedalus-TUM/ips-indoor-navigation/raw/gh-pages/pics/funktionV2.jpg" alt=""></p>
+
+<p>Das System basiert auf der Laufzeitmessung von Ultraschallwellen. Gleichzeitig vom Flugobjekt ausgesandte Infrarot- und Ultraschallsignale werden von fest installierten Bodenstationen empfangen. Die dabei auftretende Zeitdifferenz zwischen der Ankunft des Infrarotsignals und des Ultraschallsignals wird an die Basisstation durch Funkübertragung weitergeleitet. Der an die Basisstation angeschlossene Rechner kann nun aus den übertragenen Daten mittels Triangulationsverfahren die Position des Flugobjektes bestimmen.</p>
+
+<p>Weitere Informationen zum IPS finden Sie in den Artikeln dieser Präsentationseite. Für den direkten Download aller Projektdateien klicken Sie bitte auf den Download-Button oben links.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/Daedalus-TUM">Daedalus-TUM</a></p>
