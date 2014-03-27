@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title> Supersonik Hyperphonik Indoor Positionizer System by Daedalus-TUM</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1> Supersonik Hyperphonik Indoor Positionizer System (S.H.I.P.S.)</h1>
+        <p>Positionsbestimmung basierend auf Ultraschallsignaldetektion</p>
+
+        <p class="view"><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View the Project on GitHub <small>Daedalus-TUM/ips-indoor-navigation</small></a></p>
+
+        <ul>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View On <strong>GitHub</strong></a></li>
+        </ul>
+	
+	<menu>    Überblick</menu>
+	<menu>    Mitmachen</menu>
+	<menu>    Hardware</menu>
+	<menu><submenu> Bodenstationen</submenu></menu>
+	<menu><submenu> Basisstation</submenu></menu>
+        <menu><submenu> Gondelmodul</submenu></menu>
+	<menu>    Software</menu>
+	<menu>    Anwendungen</menu>
+	
+       </header>
+      <section>
+        <h3>
+<a name="Hardware: Bodenstationen"><span class="octicon octicon-link"></span></a>Hardware - Bodenstationen</h3>
+
+<p>Die Bodenstationen empfangen die von der Gondel ausgesandten Impulse und leitet die gemessene Zeitdifferenz zwischen Infrarot- und Ultraschallimpuls an das Basismodul weiter.</p>
+<p>Das Signal des Ultraschallwandlers wird durch drei hintereinander geschaltete Bandpassfilter mit einem Verstärkungsfaktor von je 20 verstärkt. Ein Komparator wandelt das sinusförmige Signal in ein Rechtecksignal, welches dann vom Mikrocontroller ausgewertet wird. Als Infrarot-Empfängermodul wird das TSOP 31240 von VISHAY eingesetzt. Es filtert Infrarotsignale mit einer aufmodulierten Frequenz von 40 kHz heraus und gibt ein logisch-0 Signal an den Prozessor weiter. Das Funkmodul basiert auf dem nRF24L01+ transceiver IC von Nordic Semiconductor für das 2.4 GHz Band. Im Vergleich zu anderen Modulen ist es sehr stromsparend, was eine längere Akkulaufzeit erlaubt.</p>
+<p>
+Microcontroller:      ATmega8
+Funkmodul:           NRF24L01</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Daedalus-TUM">Daedalus-TUM</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
