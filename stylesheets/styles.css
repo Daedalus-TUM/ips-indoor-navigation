@@ -160,7 +160,7 @@ header ul a strong {
   color:#222;
 }
 
-header ul ul {
+header menu {
   border-radius:2px;
   padding-top:9px;
   font-size:14px;
@@ -170,19 +170,13 @@ header ul ul {
   font-weight:700;
 }
 
-header ul ul submenu {
+header menu submenu {
   background: #fff
+  display:block
   width: 180px;
   font-size:12px
   float: right;
   height: 24px:
-  background: #eee;
-  background: -moz-linear-gradient(top, #f8f8f8 0%, #99bbcc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#99bbcc));
-  background: -webkit-linear-gradient(top, #f8f8f8 0%,#99bbcc 100%);
-  background: -o-linear-gradient(top, #f8f8f8 0%,#99bbcc 100%);
-  background: -ms-linear-gradient(top, #f8f8f8 0%,#99bbcc 100%);
-  background: linear-gradient(top, #f8f8f8 0%,#99bbcc 100%);
 }
 
 section {
