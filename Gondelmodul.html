@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title> Supersonik Hyperphonik Indoor Positionizer System by Daedalus-TUM</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1> Supersonik Hyperphonik Indoor Positionizer System (S.H.I.P.S.)</h1>
+        <p>Positionsbestimmung basierend auf Ultraschallsignaldetektion</p>
+
+        <p class="view"><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View the Project on GitHub <small>Daedalus-TUM/ips-indoor-navigation</small></a></p>
+
+        <ul>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation">View On <strong>GitHub</strong></a></li>
+        </ul>
+	
+	<menu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/index.html">    Überblick</menu>
+	<menu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/join.html">    Mitmachen</menu>
+	<menu>    Hardware</menu>
+	<menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</submenu></menu>
+	<menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/Basisstation.html"> Basisstation</submenu></menu>
+        <menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</submenu></menu>
+	<menu>    Software</menu>
+	<menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/Python.html"> Python</submenu></menu>
+        <menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/C++.html"> C++</submenu></menu>
+	<menu><submenu><a href="https://github.com/Daedalus-TUM/ips-indoor-navigation/Arduino.html"> Arduino</submenu></menu>
+	<menu>    Anwendungen</menu>
+	
+       </header>
+      <section>
+        <h3>
+<a name="Hardware: Bodenstationen"><span class="octicon octicon-link"></span></a>Hardware - Gondelmodul</h3>
+
+<p>Das Gondelmodul ist am Heliumballon angebracht und ist für die Erzeugung der zur Positionsbestimmung notwendigen Ultraschall- und Infrarotimpulse zuständig. Dazu werden je sechs ringförmig angeordnete, parallel verschaltete Ultraschallwandler und Infrarot-LED verwendet. Die Ultraschallwandler werden über einen Motortreiber angesteuert. Die Infrarot-LEDs sind für eine Spannung von 5 Volt ausgelegt und sollten nicht direkt an einem Mikrocontrollerpin betrieben werden, da kurzzeitig Ströme von 100 mA fließen. Hier ist eine einfache Transistorschaltung zweckmäßig.</p>
+<p>Im eingeschalteten Zustand sendet das Gondelmodul kontinuierlich eine Pulsfolge von 8 Takten bei 40kHz Frequenz alle 200ms. Diese gleichzeitig gesendeten Pulsfolgen werden mit entsprechender Zeitdifferenz zwischen Ultraschall und Infrarot von den Basisstationen aufgefangen.</p>
+<p>
+Microcontroller:      ATmega8
+Funkmodul:           NRF24L01
+Ultraschalltreiber:    Sparkfun Motor Driver 1A Dual TB6612FNG</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Daedalus-TUM">Daedalus-TUM</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
