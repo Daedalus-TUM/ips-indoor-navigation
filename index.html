@@ -28,10 +28,12 @@
 	
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/index.html">    Überblick</a></menu>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/join.html">    Mitmachen</a></menu>
-	<menu>    Hardware</menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</a></submenu></menu>
-	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Basisstation.html"> Basisstation</a></submenu></menu>
-        <menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</a></submenu></menu>
+	<div onClick="Show_Stuff(hardware)"><menu>Hardware</menu></div>
+        <span id="hardware" STYLE="display:none">
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</a></submenu></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Basisstation.html"> Basisstation</a></submenu></menu>
+		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</a></submenu></menu>
+	</span>
 	<menu>    Software</menu>
 	<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Python.html"> Python</submenu></a></menu>
         <menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/C++.html"> C++</submenu></a></menu>
@@ -60,3 +62,21 @@
     
   </body>
 </html>
+
+<script language="JavaScript">
+<!--
+function Show_Stuff(Click_Menu)
+// Function that will swap the display/no display for
+// all content within span tags
+{
+if (Click_Menu.style.display == "none")
+{
+Click_Menu.style.display = "";
+}
+else
+{
+Click_Menu.style.display = "none";
+}
+}
+-->
+</script>
