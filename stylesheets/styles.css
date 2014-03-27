@@ -171,6 +171,7 @@ header ul ul {
 }
 
 header ul ul submenu {
+  background: #fff
   width: 180px;
   float: right;
 }
