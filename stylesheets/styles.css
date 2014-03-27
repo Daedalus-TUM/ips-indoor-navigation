@@ -215,7 +215,7 @@ footer {
   width:270px;
   float:left;
   position:absolute;
-  clip:auto;
+  clip:inherit;
   bottom:20px;
 }
 
