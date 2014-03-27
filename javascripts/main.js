@@ -4,11 +4,11 @@ function Show_Stuff(Click_Menu)
 {
   switch (Click_Menu)
   {
-  case hardware:
+  case "hardware":
     hardware.style.display = "";
     software.style.display = "none";
     break;
-  case software:
+  case "software":
     hardware.style.display = "none";
     software.style.display = "";
     break;
