@@ -164,6 +164,7 @@ header menu {
   font-size:14px;
   color:#222;
   line-height: 3;
+  float: center;
   text-align:center;
   height:26px;
   font-weight:700;
@@ -188,7 +189,7 @@ header menu {
 header menu submenu {
   display:block;
   font-size:13px;
-  float: right;
+  text-align: right;
   font-weight: 600;
 
   margin:0px;
