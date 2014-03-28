@@ -218,8 +218,7 @@ hr {
 footer {
   width:270px;
   float:left;
-  position:absolute;
-  clip:inherit;
+  position:fixed;
   bottom:20px;
 }
 
