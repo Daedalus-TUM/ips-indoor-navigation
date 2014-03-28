@@ -58,7 +58,7 @@ blockquote {
 }
 
 code, pre {
-  font: Helvetica;
+  font: Monospace;
   color:#333;
   font-size:12px;
 }
