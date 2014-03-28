@@ -58,7 +58,7 @@ blockquote {
 }
 
 code, pre {
-  font: Lucida Console;
+  font: Terminal;
   color:#333;
   font-size:12px;
 }
