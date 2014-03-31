@@ -27,19 +27,21 @@
         </ul>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/index.html">Überblick</a></menu>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Mitmachen.html">Mitmachen</a></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Entwicklung.html">Entwicklung</a></menu>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Hardware.html">Hardware</a></menu>
 		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Bodenstationen.html"> Bodenstationen</a></submenu></menu>
 		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Basisstation.html"> Basisstation</a></submenu></menu>
 		<menu><submenu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Gondelmodul.html"> Gondelmodul</a></submenu></menu>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Software.html">Software</a></menu>
 	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Anwendung.html">Anwendung</a></menu>
+	<menu><a href="http://daedalus-tum.github.io/ips-indoor-navigation/Team.html">Team</a></menu>
        </header>
       <section>
 <h3><a name="Bodenstationen" class="anchor" href="#Bodenstationen"><span class="octicon octicon-link"></span></a>Hardware: Bodenstationen</h3>
 
 <p>Die Bodenstationen empfangen die von der Gondel ausgesandten Impulse und leitet die gemessene Zeitdifferenz zwischen Infrarot- und Ultraschallimpuls an das Basismodul weiter.</p>
 <p><img src="https://github.com/Daedalus-TUM/ips-indoor-navigation/raw/gh-pages/images/BodenstationV2.png" alt=""></p>
-<p>Das Signal des Ultraschallwandlers wird durch drei hintereinander geschaltete Bandpassfilter mit einem Verstärkungsfaktor von je 20 verstärkt. Ein Komparator wandelt das sinusförmige Signal in ein Rechtecksignal, welches dann vom Mikrocontroller ausgewertet wird. Als Infrarot-Empfängermodul wird das TSOP 31240 von VISHAY eingesetzt. Es filtert Infrarotsignale mit einer aufmodulierten Frequenz von 40 kHz heraus und gibt ein logisch-0 Signal an den Prozessor weiter. Das Funkmodul basiert auf dem nRF24L01+ transceiver IC von Nordic Semiconductor für das 2.4 GHz Band. Im Vergleich zu anderen Modulen ist es sehr stromsparend, was eine längere Akkulaufzeit erlaubt.</p>
+<p>Das Signal des Ultraschallwandlers wird durch drei hintereinander geschaltete Bandpassfilter mit einem Verstärkungsfaktor von je 20 verstärkt. Ein Komparator wandelt das sinusförmige Signal in ein Rechtecksignal, welches dann vom Mikrocontroller ausgewertet wird. Als Infrarot-Empfängermodul wird das TSOP 31240 von VISHAY eingesetzt. Es filtert Infrarotsignale mit einer aufmodulierten Frequenz von 40 kHz heraus und gibt ein logisch-0 Signal an den Prozessor weiter. Das Funkmodul basiert auf dem nRF24L01+ Transceiver IC von Nordic Semiconductor für das 2.4 GHz Band. Im Vergleich zu anderen Modulen ist es sehr stromsparend, was eine längere Akkulaufzeit erlaubt.</p>
 <p>Im Laufe des IPS-Projektes wurden die Bodenstationen konstant weiterentwickelt. Beim oben abgebildeten Beispiel handelt es sich um das neueste Modell.</p>
 <ol>
 <li>Funkmodul nRF24L01</li>
@@ -51,7 +53,7 @@
 <li>Ultraschallempfänger</li>
 <li>Serielle Schnittstelle zur Installation eines Bootloaders</li>
 </ol>
-<p>Der vollständige Schaltplan ist in der Github-Repository zu finden.
+<p>Der vollständige Schaltplan ist in der Github-Repository zu finden.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/Daedalus-TUM">Daedalus-TUM</a></p>
